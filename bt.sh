@@ -34,15 +34,17 @@ function restart_daemon {
     echo "Bluetooth daemon restarted."
 }
 
-echo "To access defaults, you may be prompted for your password..."
+function pw_notification {
+    echo "To access defaults, you may be prompted for your password..."
+}
 
 while getopts hed arg; 
 do
     case "${arg}" in
         h) usage ;;
-        e) eval sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 1 &&
+        e) pw_notification && eval sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 1 &&
             printf "${grn}==>${reset} Bluetooth Enabled\n" ;;
-        d) eval sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0 &&
+        d) pw_notification && eval sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0 &&
             printf "${red}==>${reset} Bluetooth Disabled\n" ;;
         ?) echo "Invalid option: ${state}" && usage ;;
     esac
