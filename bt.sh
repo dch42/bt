@@ -28,12 +28,6 @@ function usage {
     exit 
 }
 
-function restart_daemon {
-    eval sudo launchctl stop com.apple.bluetoothd &&
-    eval sudo launchctl start com.apple.bluetoothd &&
-    echo "Bluetooth daemon restarted."
-}
-
 function pw_notification {
     echo "To access defaults, you may be prompted for your password..."
 }
@@ -42,6 +36,13 @@ function bluetooth {
     local -i state=$1
     eval sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int $state
 }
+
+function restart_daemon {
+    eval sudo launchctl stop com.apple.bluetoothd &&
+    eval sudo launchctl start com.apple.bluetoothd &&
+    echo "Bluetooth daemon restarted."
+}
+
 
 while getopts hed arg; 
 do
