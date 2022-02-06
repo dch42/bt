@@ -32,7 +32,7 @@ function pw_notification {
     echo "To access defaults, you may be prompted for your password..."
 }
 
-function bluetooth {
+function set_bluetooth {
     local -i state=$1
     eval sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int $state
 }
@@ -48,9 +48,9 @@ while getopts hed arg;
 do
     case "${arg}" in
         h) usage ;;
-        e) pw_notification && bluetooth 1 &&
+        e) pw_notification && set_bluetooth 1 &&
             printf "${grn}==>${reset} Bluetooth Enabled\n" ;;
-        d) pw_notification && bluetooth 0 &&
+        d) pw_notification && set_bluetooth 0 &&
             printf "${red}==>${reset} Bluetooth Disabled\n" ;;
         ?) echo "Invalid option: ${arg}" && usage ;;
     esac
