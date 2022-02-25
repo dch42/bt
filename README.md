@@ -1,5 +1,5 @@
 # bt
-Script to quickly enable/disable Bluetooth
+Script to quickly enable/disable Bluetooth on Mac OS-X. Compatible with bash or zsh.
 
 ## Installation
 
@@ -14,6 +14,19 @@ chmod +x ./setup.sh && ./setup.sh
 `setup.sh` will create a personal binary directory at '/Users/$USER/bin' 
 (if it doesn't already exist) and add it to $PATH, adding executable 
 permissions and copying the script there as `bt`.
+
+~~~
+./setup.sh                         
+
+Attempting installation of script 'bt'...
+
+Creating dir /Users/user/bin...
+Adding '/Users/user/bin' to $PATH in .zprofile...
+
+[SUCCESS] Script bt installed at '/Users/user/bin/bt'!
+
+Invoke with 'bt -h' for more information.
+~~~
 
 ## Usage
 ~~~
