@@ -1,5 +1,5 @@
 # bt
-Script to quickly enable/disable Bluetooth on Mac OS-X. Compatible with bash or zsh.
+Script to quickly enable/disable Bluetooth on macOS. Compatible with bash or zsh.
 
 ## Installation
 
