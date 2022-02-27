@@ -36,6 +36,6 @@ printf "'$personal_bin' already in \$PATH...\n" ||
 add_to_path
 
 chmod +x ./${script}.sh &&
-cp ./${script}.sh $personal_bin/bt &&
+cp ./${script}.sh $personal_bin/${script} &&
 printf "\n${grn}[SUCCESS]${reset} Script $script installed at '$personal_bin/$script'!\n\nInvoke with '$script -h' for more information.\n\n" ||
 printf "\n${red}[ERROR]${reset} Something went wrong...\n\n"
