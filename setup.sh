@@ -1,8 +1,8 @@
 #!/bin/sh
 
-declare personal_bin="/Users/$USER/bin" 
+declare script_name="bt"
+declare ext="sh"
 declare cfg=".bash_profile"
-declare script="bt"
 
 declare grn="\e[0;92m"
 declare red="\e[0;91m"
@@ -15,27 +15,37 @@ function make_dir {
 
 function add_to_path {
     printf "Adding '$personal_bin' to \$PATH in $cfg...\n" & 
-    echo export PATH="$personal_bin:\$PATH" >> /Users/$USER/$cfg
+    echo export PATH="$personal_bin:\$PATH" >> $home/$cfg
 }
 
- # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-###############################################################
- # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+printf "\nAttempting installation of script '$script_name'...\n\n"
 
-printf "\nAttempting installation of script '$script'...\n\n"
+[[ -f './requirements.txt' ]] && 
+echo "Installing requirements..." &&
+eval pip3 install -r requirements.txt
+
+case $OSTYPE in 
+    "darwin"*) declare home="/Users/$USER" ;;
+    "linux"*) declare home="/home/$USER" ;;
+esac
+
+declare personal_bin="$home/bin"
 
 [ -n $ZSH_VERSION ] && 
-cfg=".zprofile" 
+cfg=".zprofile"
 
 [[ ! -d $personal_bin ]] && 
 make_dir ||
-printf "'$personal_bin' exists...\n"
+printf "\n${grn}[OK]${reset} '$personal_bin' exists...\n"
 
-grep -q "$personal_bin" /Users/$USER/$cfg && 
-printf "'$personal_bin' already in \$PATH...\n" ||
+grep -q "$personal_bin" $home/$cfg && 
+printf "${grn}[OK]${reset} '$personal_bin' already in \$PATH...\n" ||
 add_to_path
 
-chmod +x ./${script}.sh &&
-cp ./${script}.sh $personal_bin/${script} &&
-printf "\n${grn}[SUCCESS]${reset} Script $script installed at '$personal_bin/$script'!\n\nInvoke with '$script -h' for more information.\n\n" ||
-printf "\n${red}[ERROR]${reset} Something went wrong...\n\n"
+printf "\nInstalling '$script_name'...\n"
+chmod +x ./${script_name}.$ext &&
+cp ./${script_name}.$ext $personal_bin/$script_name &&
+printf "\n${grn}[SUCCESS]${reset} Script '$script_name' installed at '$personal_bin/$script_name'!\n\n" ||
+printf "\n${red}[ERROR]${reset} Something went wrong...\n" exit 1
+
+exit 0
