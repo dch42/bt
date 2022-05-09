@@ -7,25 +7,13 @@ Clone the repo and run `setup.sh`:
 ~~~
 git clone https://github.com/dch42/bt.git && cd ./bt
 ~~~
+
+If running MacOS or Linux, and using bash or zsh, setup.sh can be run to quickly make the script available in $PATH.
+
+Add exec permissions and run setup.sh:
+
 ~~~
 chmod +x ./setup.sh && ./setup.sh
-~~~
-
-`setup.sh` will create a personal binary directory at '/Users/$USER/bin' 
-(if it doesn't already exist) and add it to $PATH, adding executable 
-permissions and copying the script there as `bt`.
-
-~~~
-./setup.sh                         
-
-Attempting installation of script 'bt'...
-
-Creating dir /Users/user/bin...
-Adding '/Users/user/bin' to $PATH in .zprofile...
-
-[SUCCESS] Script bt installed at '/Users/user/bin/bt'!
-
-Invoke with 'bt -h' for more information.
 ~~~
 
 ## Usage
